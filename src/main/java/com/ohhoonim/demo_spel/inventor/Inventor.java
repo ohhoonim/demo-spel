@@ -1,23 +1,22 @@
 package com.ohhoonim.demo_spel.inventor;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class Inventor {
     private String name;
     private String nationality;
-    private String[] inventions;
-    private Date birthdate;
+    private String[] inventions = new String[0];
+    private LocalDate birthdate;
     private PlaceOfBirth placeOfBirth;
 
     public Inventor(String name, String nationality) {
-        GregorianCalendar c = new GregorianCalendar();
         this.name = name;
         this.nationality = nationality;
-        this.birthdate = c.getTime();
+        this.birthdate = LocalDate.now();
     }
 
-    public Inventor(String name, Date birthdate, String nationality) {
+    public Inventor(String name, LocalDate birthdate, String nationality) {
         this.name = name;
         this.nationality = nationality;
         this.birthdate = birthdate;
@@ -31,7 +30,7 @@ public class Inventor {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = Objects.requireNonNull(name, "Name cannot be null");
     }
 
     public String getNationality() {
@@ -42,11 +41,11 @@ public class Inventor {
         this.nationality = nationality;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -64,5 +63,10 @@ public class Inventor {
 
     public String[] getInventions() {
         return inventions;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventor{name='" + name + "', nationality='" + nationality + "', birthdate=" + birthdate + "}";
     }
 }

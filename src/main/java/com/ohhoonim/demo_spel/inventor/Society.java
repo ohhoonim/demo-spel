@@ -8,17 +8,17 @@ import java.util.Map;
 public class Society {
     private String name;
 
-    public static String Advisors = "advisors";
-    public static String President = "president";
+    public static final String ADVISORS = "advisors";
+    public static final String PRESIDENT = "president";
 
     private List<Inventor> members = new ArrayList<>();
-    private Map officers = new HashMap();
+    private Map<String, Inventor> officers = new HashMap<>();
 
-    public List getMembers() {
+    public List<Inventor> getMembers() {
         return members;
     }
 
-    public Map getOfficers() {
+    public Map<String, Inventor> getOfficers() {
         return officers;
     }
 
@@ -31,11 +31,8 @@ public class Society {
     }
 
     public boolean isMember(String name) {
-        for (Inventor inventor : members) {
-            if (inventor.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+        return members.stream()
+                .filter(m -> m.getName().equals(name)).findFirst()
+                .isPresent();
     }
 }
